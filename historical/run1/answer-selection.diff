@@ -1,0 +1,64 @@
+--- upstream
++++ reviewed
+@@ -17,6 +17,19 @@
+ 
+ log = logging.getLogger("evoagentbench")
+ 
++
++
++def _final_public_answer(records):
++    last = None
++    for record in records:
++        msg = record.get("message", {})
++        if msg.get("role") == "assistant":
++            last = msg
++    if not last or last.get("stopReason") != "stop":
++        return ""
++    return "\n".join(block["text"] for block in last.get("content", [])
++                     if isinstance(block, dict) and block.get("type") == "text"
++                     and block.get("text", "").strip()).strip()
+ 
+ class OpenClawAdapter(AgentAdapter):
+     name = "openclaw"
+@@ -232,36 +245,11 @@
+     def call_agent(self, prompt, session_id, timeout=3600, cwd=None) -> dict:
+         """Wrap base call_agent; on empty response, fall back to session.jsonl."""
+         d = super().call_agent(prompt, session_id, timeout, cwd=cwd)
+-        if not d.get("response"):
+-            session_file = self._session_file(session_id)
+-            if session_file.exists():
+-                try:
+-                    last = ""
+-                    for line in open(session_file):
+-                        try:
+-                            rec = json.loads(line)
+-                            if rec.get("type") == "message":
+-                                msg = rec.get("message", {})
+-                                if msg.get("role") == "assistant":
+-                                    c = msg.get("content", "")
+-                                    if isinstance(c, list):
+-                                        parts = []
+-                                        for x in c:
+-                                            if not isinstance(x, dict):
+-                                                continue
+-                                            t = x.get("text") or x.get("thinking") or ""
+-                                            if t:
+-                                                parts.append(t)
+-                                        last = "\n".join(parts)
+-                                    else:
+-                                        last = str(c)
+-                        except Exception:
+-                            continue
+-                    if last:
+-                        d["response"] = last
+-                        d["response_source"] = "session_fallback"
+-                except Exception:
+-                    pass
++        d["upstream_cli_response"] = d.get("response", "")
++        path = self._session_file(session_id)
++        with path.open(encoding="utf-8") as stream:
++            d["response"] = _final_public_answer(json.loads(line) for line in stream if line.strip())
++        d["response_source"] = "final_public_stop" if d["response"] else "no_public_final"
+         return d
+ 
+     # --- live watch ------------------------------------------------------------

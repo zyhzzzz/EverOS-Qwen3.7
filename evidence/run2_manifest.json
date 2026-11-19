@@ -1,0 +1,21 @@
+{
+  "agent": "qwen3.7-flash",
+  "extract": "qwen3.7-flash",
+  "judge": "deepseek-v4-flash",
+  "model_config": {
+    "id": "qwen3.7-flash",
+    "name": "qwen3.7-flash",
+    "reasoning": true,
+    "contextWindow": 128000,
+    "maxTokens": 96000,
+    "compat": {
+      "thinkingFormat": "qwen"
+    }
+  },
+  "commit": "6aa49908adef7d430b3a172d6d7c06d5224ef6d2",
+  "trials": 1,
+  "parallel": 4,
+  "top_k": 2,
+  "case_injection": true,
+  "agent_timeout": 3000
+}

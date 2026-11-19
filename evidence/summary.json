@@ -1,0 +1,120 @@
+{
+  "run1": {
+    "skills": 17,
+    "jobs": {
+      "train": {
+        "total": 154,
+        "correct": 77,
+        "content_filter_ids": [
+          "551",
+          "90"
+        ],
+        "answer_selection_mismatch_ids": [],
+        "non_llm_ids": []
+      },
+      "baseline": {
+        "total": 65,
+        "correct": 23,
+        "content_filter_ids": [
+          "1026",
+          "895"
+        ],
+        "answer_selection_mismatch_ids": [],
+        "non_llm_ids": []
+      },
+      "with-everos": {
+        "total": 65,
+        "correct": 29,
+        "content_filter_ids": [
+          "673"
+        ],
+        "answer_selection_mismatch_ids": [],
+        "non_llm_ids": []
+      }
+    },
+    "paired": {
+      "both_correct": 21,
+      "everos_only": 8,
+      "baseline_only": 2,
+      "both_wrong": 34
+    }
+  },
+  "run2": {
+    "skills": 20,
+    "jobs": {
+      "train": {
+        "total": 154,
+        "correct": 78,
+        "content_filter_ids": [
+          "376",
+          "394",
+          "551",
+          "90"
+        ],
+        "answer_selection_mismatch_ids": [],
+        "non_llm_ids": []
+      },
+      "baseline": {
+        "total": 65,
+        "correct": 22,
+        "content_filter_ids": [
+          "1042",
+          "1161",
+          "1252",
+          "895"
+        ],
+        "answer_selection_mismatch_ids": [],
+        "non_llm_ids": []
+      },
+      "with-everos": {
+        "total": 65,
+        "correct": 29,
+        "content_filter_ids": [
+          "285",
+          "895"
+        ],
+        "answer_selection_mismatch_ids": [],
+        "non_llm_ids": []
+      }
+    },
+    "paired": {
+      "both_correct": 18,
+      "everos_only": 11,
+      "baseline_only": 4,
+      "both_wrong": 32
+    }
+  },
+  "between_runs": {
+    "baseline": {
+      "changed_correctness_count": 13,
+      "task_ids": [
+        "1010",
+        "1026",
+        "1032",
+        "1076",
+        "1243",
+        "161",
+        "196",
+        "366",
+        "694",
+        "791",
+        "922",
+        "959",
+        "987"
+      ]
+    },
+    "with-everos": {
+      "changed_correctness_count": 8,
+      "task_ids": [
+        "161",
+        "285",
+        "434",
+        "614",
+        "673",
+        "791",
+        "796",
+        "895"
+      ]
+    }
+  }
+}

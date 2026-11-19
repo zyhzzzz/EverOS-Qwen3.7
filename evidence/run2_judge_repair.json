@@ -1,0 +1,12 @@
+{
+  "reason": "Missing correct field in original judge response",
+  "same_official_verifier": true,
+  "answer_regenerated": false,
+  "repaired_verifier_result": {
+    "reward": 0.0,
+    "method": "llm_judge",
+    "judge_correct": false,
+    "exact_match": false
+  },
+  "session_sha256": "e8f71f41345146059f4f87df54bfab5ee9799fbea14264125cd679e5c2d86c31"
+}
